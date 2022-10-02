@@ -151,11 +151,31 @@ delimiter ;
 
 
 /* Tabla Marca */
+ create table tb_marca(
+	idm int primary key auto_increment,
+    des_marca varchar(255),
+	id_create int,
+    date_create date,
+    id_update int,
+    date_update date,
+    activo int
+ );
+
+
 
 delimiter //
 create procedure sp_listarMarca()
 begin
   select * from tb_marca;
+ end //
+ delimiter ;
+
+delimiter //
+create procedure sp_listarMarcaByid(
+    _idm int
+)
+begin
+  select * from tb_marca where idm = _idm;
  end //
  delimiter ;
 
@@ -167,5 +187,33 @@ begin
  insert into tb_marca(des_marca, id_create, date_create, id_update, date_update, activo)
  values (_des_marca, _id_create, curdate(), _id_create, curdate(), 1);
  
+ end //
+ delimiter ;
+
+
+ delimiter //
+create procedure sp_actualizarMarca( 
+	_des_marca varchar(255) , _id_update int, _idm int
+)
+begin
+	update tb_marca set
+    des_marca = _des_marca,
+    id_update = _id_update,
+    date_update = curdate(),
+    activo = 1
+    where idm = _idm;
+ end //
+ delimiter ;
+
+  delimiter //
+create procedure sp_eliminarMarca( 
+ _id_update int, _idm int
+)
+begin
+	update tb_marca set
+    id_update = _id_update,
+    date_update = curdate(),
+    activo = 0
+    where idm = _idm;
  end //
  delimiter ;
