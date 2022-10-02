@@ -7,6 +7,7 @@ import { port } from './config.js'
 
 import authRoutes from "./routes/auth.routes.js";
 import usuarioRoutes from "./routes/user.routes.js";
+import marcaRoutes from "./routes/marca.routes.js";
 
 const app = express()
 
@@ -23,6 +24,6 @@ app.use(express.json())
 
 app.use('/api',authRoutes)
 app.use('/api',usuarioRoutes)
-
+app.use('/api',marcaRoutes)
 app.listen( port )
 console.log('Server on port', port )

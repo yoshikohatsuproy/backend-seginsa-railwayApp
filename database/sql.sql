@@ -148,3 +148,24 @@ begin
     select * from tb_usuario where cor_usuario = _cor_usuario;
 end //
 delimiter ;
+
+
+/* Tabla Marca */
+
+delimiter //
+create procedure sp_listarMarca()
+begin
+  select * from tb_marca;
+ end //
+ delimiter ;
+
+delimiter //
+create procedure sp_insertarMarca( 
+	_des_marca varchar(255) , _id_create int
+)
+begin
+ insert into tb_marca(des_marca, id_create, date_create, id_update, date_update, activo)
+ values (_des_marca, _id_create, curdate(), _id_create, curdate(), 1);
+ 
+ end //
+ delimiter ;
