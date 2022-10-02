@@ -35,10 +35,10 @@ router.post(
   ],
   insertUsuario
 );
-router.put("/usuario/:idu", updateUsuario);
+router.put("/usuario/:idu",validarJWT, updateUsuario);
 
-router.put("/usuario/cambiar/:idu", cambiarContraseniaUsuario);
-router.put("/usuario/delete/:idu", deleteUsuario);
+router.put("/usuario/cambiar/:idu", validarJWT, cambiarContraseniaUsuario);
+router.put("/usuario/delete/:idu",validarJWT, deleteUsuario);
 export default router;
 
 /*
