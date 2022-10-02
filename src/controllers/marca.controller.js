@@ -3,7 +3,7 @@ import { response } from "express";
 
 export const getMarcas = async (req, res = response) => {
     try {
-      const [rows] = await pool.query("call sp_listarUsuarios();");
+      const [rows] = await pool.query("call sp_listarMarca();");
   
       if (rows[0].length <= 0)
         return res.status(404).json({
