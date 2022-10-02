@@ -4,7 +4,7 @@ import { check } from "express-validator";
 import { validarJWT } from "../middlewares/validar-jwt.js";
 import { validarCampos } from "../middlewares/validar-campos.js";
 import {
-    deleteMarca,
+  deleteMarca,
   getMarca,
   getMarcas,
   insertMarca,
@@ -27,21 +27,15 @@ router.post(
 );
 
 router.put(
-    "/marca/:idm",
-    [
-      check("des_marca", "La descripción es obligatoria").not().isEmpty(),
-      validarCampos,
-      validarJWT,
-    ],
-    updateMarca
-)
-
-router.put(
-    "/marca/delete/:idm",
+  "/marca/:idm",
+  [
+    check("des_marca", "La descripción es obligatoria").not().isEmpty(),
+    validarCampos,
     validarJWT,
-    deleteMarca
-)
+  ],
+  updateMarca
+);
 
-
+router.put("/marca/delete/:idm", validarJWT, deleteMarca);
 
 export default router;
