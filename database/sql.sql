@@ -217,3 +217,18 @@ begin
     where idm = _idm;
  end //
  delimiter ;
+
+
+/* Tabla Proveedor */
+  create table tb_proveedor(
+	idp int primary key auto_increment,
+    des_prov varchar(255),
+    con_prov varchar(255),
+    tel_prov varchar(255),
+    cor_prov varchar(255),
+	id_create int,
+    date_create date,
+    id_update int,
+    date_update date,
+    activo int
+ );
