@@ -74,17 +74,18 @@ export const insertUsuario = async (req, res = response) => {
       });
 
     const salt = bcrypt.genSaltSync();
-    const password_encriptado = bcrypt.hashSync(pas_usuario, salt)
+    const password_encriptado = bcrypt.hashSync(pas_usuario, salt);
+
     [rows] = await pool.query("call sp_insertUsuario(?,?,?,?,?,?,?,?)", [
-        nom_usuario,
-        ape_usuario,
-        tel_usuario,
-        car_usuario,
-        cor_usuario,
-        password_encriptado,
-        idrol,
-        id_create,
-      ]);
+      nom_usuario,
+      ape_usuario,
+      tel_usuario,
+      car_usuario,
+      cor_usuario,
+      password_encriptado,
+      idrol,
+      id_create,
+    ]);
 
     return res.status(201).json({
       msg: "Usuario insertado correctamente",
