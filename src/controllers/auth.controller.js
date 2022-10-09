@@ -3,6 +3,8 @@ import { response } from "express";
 import bcrypt from "bcryptjs";
 import { generarJWT } from "../helpers/jwt.js";
 
+import { msgError } from "../helpers/messages.js";
+
 export const login = async (req, res = response) => {
   try {
     const { cor_usuario, pas_usuario } = req.body;
@@ -49,7 +51,7 @@ export const login = async (req, res = response) => {
   } catch (error) {
     console.log(error);
     return res.status(501).json({
-      msg: "Ha ocurrido un error comuníquese con su administrador",
+      msg: msgError,
       ok: false
     });
   }

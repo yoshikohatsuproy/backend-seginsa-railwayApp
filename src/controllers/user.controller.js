@@ -1,6 +1,18 @@
 import { pool } from "../db.js";
 import { response } from "express";
 import bcrypt from "bcryptjs";
+import {
+  msgCreate,
+  msgDelete,
+  msgError,
+  msgListExist,
+  msgNoExitID,
+  msgNoList,
+  msgUpdate,
+} from "../helpers/messages.js";
+
+/* Name controller para mensajes personalizados  */
+const namecontroller = "Usuario";
 
 export const getUsuarios = async (req, res = response) => {
   try {
@@ -8,19 +20,19 @@ export const getUsuarios = async (req, res = response) => {
 
     if (rows[0].length <= 0)
       return res.status(404).json({
-        msg: "No existe una lista de usuarios",
+        msg: msgNoList(namecontroller),
         ok: false,
       });
 
     return res.status(201).json({
-      msg: "Lista de usuarios obtenida exitosamente",
+      msg: msgListExist(namecontroller),
       data: rows[0],
       ok: true,
     });
   } catch (error) {
     console.log(error);
     return res.status(501).json({
-      msg: "Ha ocurrido un error comuníquese con su administrador",
+      msg: msgError,
       ok: false,
     });
   }
@@ -34,19 +46,19 @@ export const getUsuarioById = async (req, res = response) => {
 
     if (rows[0].length <= 0)
       return res.status(404).json({
-        msg: "Usuario no encontrado con ese id",
+        msg: msgNoExitID(namecontroller),
         ok: false,
       });
 
     return res.status(201).json({
-      msg: "Lista de usuarios obtenida exitosamente",
+      msg: msgListExist(namecontroller),
       data: rows[0],
       ok: true,
     });
   } catch (error) {
     console.log(error);
     return res.status(501).json({
-      msg: "Ha ocurrido un error comuníquese con su administrador",
+      msg: msgError,
       ok: false,
     });
   }
@@ -88,13 +100,13 @@ export const insertUsuario = async (req, res = response) => {
     ]);
 
     return res.status(201).json({
-      msg: "Usuario insertado correctamente",
+      msg: msgCreate(namecontroller),
       ok: true,
     });
   } catch (error) {
     console.log(error);
     return res.status(501).json({
-      msg: "Ha ocurrido un error comuníquese con su administrador",
+      msg: msgError,
       ok: false,
     });
   }
@@ -126,13 +138,13 @@ export const updateUsuario = async (req, res = response) => {
     );
 
     return res.status(201).json({
-      msg: "Usuario actualizado correctamente",
+      msg: msgUpdate(namecontroller),
       ok: true,
     });
   } catch (error) {
     console.log(error);
     return res.status(501).json({
-      msg: "Ha ocurrido un error comuníquese con su administrador",
+      msg: msgError,
       ok: false,
     });
   }
@@ -149,13 +161,13 @@ export const deleteUsuario = async (req, res = response) => {
     ]);
 
     return res.status(201).json({
-      msg: "Usuario eliminado correctamente",
+      msg: msgDelete(namecontroller),
       ok: true,
     });
   } catch (error) {
     console.log(error);
     return res.status(501).json({
-      msg: "Ha ocurrido un error comuníquese con su administrador",
+      msg: msgError,
       ok: false,
     });
   }
@@ -182,7 +194,7 @@ export const cambiarContraseniaUsuario = async (req, res = response) => {
   } catch (error) {
     console.log(error);
     return res.status(501).json({
-      msg: "Ha ocurrido un error comuníquese con su administrador",
+      msg: msgError,
       ok: false,
     });
   }

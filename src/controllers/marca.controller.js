@@ -1,5 +1,18 @@
 import { pool } from "../db.js";
 import { response } from "express";
+import {
+  msgCreate,
+  msgDelete,
+  msgError,
+  msgListExist,
+  msgNoExitID,
+  msgNoList,
+  msgUpdate,
+} from "../helpers/messages.js";
+
+/* Name controller para mensajes personalizados  */
+const namecontroller = "Marca";
+
 
 export const getMarcas = async (req, res = response) => {
   try {
@@ -7,19 +20,19 @@ export const getMarcas = async (req, res = response) => {
 
     if (rows[0].length <= 0)
       return res.status(404).json({
-        msg: "No existe una lista de marcas",
+        msg: msgNoList(namecontroller),
         ok: false,
       });
 
     return res.status(201).json({
-      msg: "Lista de marcas obtenida exitosamente",
+      msg: msgListExist(namecontroller),
       data: rows[0],
       ok: true,
     });
   } catch (error) {
     console.log(error);
     return res.status(501).json({
-      msg: "Ha ocurrido un error comuníquese con su administrador",
+      msg: msgError,
       ok: false,
     });
   }
@@ -32,19 +45,19 @@ export const getMarca = async (req, res = response) => {
 
     if (rows[0].length <= 0)
       return res.status(404).json({
-        msg: "No existe una marca con ese id",
+        msg: msgNoExitID(namecontroller),
         ok: false,
       });
 
     return res.status(201).json({
-      msg: "Lista de marcas obtenida exitosamente",
+      msg: msgListExist(namecontroller),
       data: rows[0],
       ok: true,
     });
   } catch (error) {
     console.log(error);
     return res.status(501).json({
-      msg: "Ha ocurrido un error comuníquese con su administrador",
+      msg: msgError,
       ok: false,
     });
   }
@@ -60,14 +73,14 @@ export const insertMarca = async (req, res = response) => {
     ]);
 
     return res.status(201).json({
-      msg: "La marca ha sido agregada correctamente",
+      msg: msgCreate(namecontroller),
       data: rows[0],
       ok: true,
     });
   } catch (error) {
     console.log(error);
     return res.status(501).json({
-      msg: "Ha ocurrido un error comuníquese con su administrador",
+      msg: msgError,
       ok: false,
     });
   }
@@ -85,14 +98,14 @@ export const updateMarca = async (req, res = response) => {
     ]);
 
     return res.status(201).json({
-      msg: "La marca ha sido actualizada correctamente",
+      msg: msgUpdate(namecontroller),
       data: rows[0],
       ok: true,
     });
   } catch (error) {
     console.log(error);
     return res.status(501).json({
-      msg: "Ha ocurrido un error comuníquese con su administrador",
+      msg: msgError,
       ok: false,
     });
   }
@@ -109,14 +122,14 @@ export const deleteMarca = async (req, res = response) => {
       ]);
   
       return res.status(201).json({
-        msg: "La marca ha sido eliminada correctamente",
+        msg: msgDelete(namecontroller),
         data: rows[0],
         ok: true,
       });
     } catch (error) {
       console.log(error);
       return res.status(501).json({
-        msg: "Ha ocurrido un error comuníquese con su administrador",
+        msg: msgError,
         ok: false,
       });
     }
